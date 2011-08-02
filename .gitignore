@@ -1,0 +1,12 @@
+target
+*.iml
+*.ipr
+*.iws
+.project
+*.class
+.classpath
+.settings/
+go
+dist
+bin
+.DS_Store
