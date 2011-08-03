@@ -51,9 +51,7 @@ abstract class Base(val threads: List[Int],
         values.foreach {
           value =>
             test(client, value, thread, items, true)
-            catchExp {
-              client.flushAllWithNoReply()
-            }
+
         }
     }
     println("=" * 70)
