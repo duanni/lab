@@ -51,11 +51,13 @@ abstract class Base(val threads: List[Int],
         values.foreach {
           value =>
             test(client, value, thread, items, true)
+            catchExp {
+              client.flushAllWithNoReply()
+            }
         }
     }
     println("=" * 70)
     catchExp {
-      client.flushAllWithNoReply()
       client.shutdown()
     }
   }
@@ -107,7 +109,9 @@ class Put(threads: List[Int],
           servers: String) extends Base(threads, values, queue, totalItems, servers) {
 
   override def execute(client: MemcachedClient, value: String) {
-    client.set(queue, 0, value, timeout)
+    catchExp {
+      client.set(queue, 0, value, timeout)
+    }
   }
 
 }
@@ -118,9 +122,11 @@ class PutAndGet(threads: List[Int],
                 totalItems: Int,
                 servers: String) extends Base(threads, values, queue, totalItems, servers) {
   override def execute(client: MemcachedClient, value: String) {
-    client.set(queue, 0, value, timeout)
-    val v = client.get(queue)
-    v
+    catchExp {
+      client.set(queue, 0, value, timeout)
+      val v = client.get(queue)
+      v
+    }
   }
 }
 
