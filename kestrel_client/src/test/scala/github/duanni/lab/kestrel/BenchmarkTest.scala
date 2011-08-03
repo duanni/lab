@@ -24,7 +24,7 @@ class BenchmarkTest extends FunSuite {
     val List(put, putAndGet) = Base(threads, values, queue, totalItems, servers)
     println("put and get")
     putAndGet.start()
-    println("put")
-    put.start()
+    //    println("put")
+    //    put.start()
   }
 }
