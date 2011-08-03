@@ -30,11 +30,9 @@ abstract class Base(val threads: List[Int],
 
   val formatStr = {
     "%1$-" + ("threads".length + 6) + "d" +
-      "%2$-" + ("items/t".length() + 6) + "d" +
-      "%3$-" + ("all".length() + 6) + "d" +
-      "%4$-" + ("valueLength".length + 6) + "d" +
-      "%5$-" + ("tps/s".length() + 6) + ".0f" +
-      "%6$.2f\n"
+      "%2$-" + ("valueLength".length + 6) + "d" +
+      "%3$-" + ("tps/s".length() + 6) + ".0f" +
+      "%4$.2f\n"
   }
 
 
@@ -44,7 +42,7 @@ abstract class Base(val threads: List[Int],
     test(client, "x" * 100, 30, 3000, false) // 30 * 30000
     logger.debug("warm up")
     println("=" * 70)
-    println("threads      items/t      all      valueLength      tps/s      times(s)")
+    println("threads      valueLength      tps/s      times(s)")
     threads.foreach {
       thread =>
         val items = totalItems / thread
@@ -76,16 +74,16 @@ abstract class Base(val threads: List[Int],
     countDown.await()
     if (print) {
       val duration = System.currentTimeMillis() - start
-      printResult(threads, itemsEachThread, totalItems, value.length, duration)
+      printResult(threads, totalItems, value.length, duration)
     }
   }
 
 
-  def printResult(threads: Int, itemsEachThreads: Int, all: Int, valueLength: Int, times: Long) {
+  def printResult(threads: Int, all: Int, valueLength: Int, times: Long) {
     val sec = (times / 1000.0)
     val tps = all / sec
     //    println(formatStr, threads, itemsEachThreads, all, valueLength, tps, sec)
-    printf(formatStr, threads, itemsEachThreads, all, valueLength, tps, sec)
+    printf(formatStr, threads, valueLength, tps, sec)
   }
 
   def catchExp(func: => Unit) {
