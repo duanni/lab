@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(classOf[JUnitRunner])
 class BenchmarkTest extends FunSuite {
-  val servers = "192.168.17.234:22133 192.168.17.232:22133"
+  val servers = "192.168.17.234:22133"
   val logger = LoggerFactory.getLogger(getClass)
   val threads = List(10, 30, 50, 100, 200, 300, 1)
   //  val threads = List(5, 10)
@@ -22,7 +22,7 @@ class BenchmarkTest extends FunSuite {
 
   test("kestrel client test") {
     val List(put, putAndGet) = Base(threads, values, queue, totalItems, servers)
-    println("put and get")
+    println("put and get. totalItems " + totalItems)
     putAndGet.start()
     //    println("put")
     //    put.start()

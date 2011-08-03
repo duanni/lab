@@ -74,8 +74,9 @@
                 <version>2.6</version>
                 <configuration>
                     <argLine>
-                        -server -Xms1024m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=64m
-                        -XX:MaxPermSize=64m
+                        <![CDATA[
+                        -server -Xms1024m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=64m
+                        ]]>
                     </argLine>
                     <useFile>false</useFile>
                     <disableXmlReport>true</disableXmlReport>
